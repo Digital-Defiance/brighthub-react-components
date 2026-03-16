@@ -1,5 +1,6 @@
 // Mock @brightchain/brighthub-lib to avoid the full ECIES/GUID init chain.
 jest.mock('@brightchain/brighthub-lib', () => ({
+  ...jest.requireActual('@brightchain/brighthub-lib'),
   __esModule: true,
   BrightHubStrings: new Proxy(
     {},

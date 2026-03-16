@@ -1,4 +1,5 @@
 jest.mock('@brightchain/brighthub-lib', () => ({
+  ...jest.requireActual('@brightchain/brighthub-lib'),
   __esModule: true,
   BrightHubStrings: new Proxy(
     {},
