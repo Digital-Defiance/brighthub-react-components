@@ -14,9 +14,11 @@ import {
   IBaseHub,
   IBasePostData,
   IBaseUserProfile,
+} from '@brightchain/brighthub-lib';
+import {
   getCharacterCount,
   parsePostContent,
-} from '@brightchain/brighthub-lib';
+} from '@brightchain/brighthub-lib/lib/brighthub-lib';
 import {
   Close,
   Code,
