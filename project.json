@@ -30,6 +30,13 @@
       "options": {
         "jestConfig": "brighthub-react-components/jest.config.cts"
       }
+    },
+    "publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm publish --access public",
+        "cwd": "dist/brighthub-react-components"
+      }
     }
   }
 }
