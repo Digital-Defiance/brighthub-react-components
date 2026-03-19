@@ -9,7 +9,8 @@
  * Tab 2: Detailed Font Awesome icon markup reference
  */
 
-import { BrightHubStrings, parseMarkdown } from '@brightchain/brighthub-lib';
+import { BrightHubStrings } from '@brightchain/brighthub-lib';
+import { parseMarkdown } from '@brightchain/brighthub-lib/lib/brighthub-lib';
 import { Close } from '@mui/icons-material';
 import {
   Box,

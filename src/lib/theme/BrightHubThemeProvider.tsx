@@ -11,7 +11,14 @@ import {
   PaletteMode,
   Theme,
 } from '@mui/material/styles';
-import { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from 'react';
 
 import { useTheme as useAppTheme } from '@digitaldefiance/express-suite-react-components';
 
@@ -193,13 +200,24 @@ export function BrightHubThemeProvider({
     ? (parentTheme.mode as ThemeMode)
     : localMode;
 
-  const toggleMode = parentTheme
-    ? parentTheme.toggleColorMode
-    : () => setLocalMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+  const toggleMode = useCallback(() => {
+    if (parentTheme) {
+      parentTheme.toggleColorMode();
+    } else {
+      setLocalMode((prev) => (prev === 'light' ? 'dark' : 'light'));
+    }
+  }, [parentTheme]);
 
-  const setMode = parentTheme
-    ? (m: ThemeMode) => parentTheme.setColorMode(m)
-    : setLocalMode;
+  const setMode = useCallback(
+    (m: ThemeMode) => {
+      if (parentTheme) {
+        parentTheme.setColorMode(m);
+      } else {
+        setLocalMode(m);
+      }
+    },
+    [parentTheme],
+  );
 
   const muiTheme = useMemo(() => createBrightHubMuiTheme(mode), [mode]);
 

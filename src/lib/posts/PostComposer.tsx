@@ -14,9 +14,11 @@ import {
   IBaseHub,
   IBasePostData,
   IBaseUserProfile,
+} from '@brightchain/brighthub-lib';
+import {
   getCharacterCount,
   parsePostContent,
-} from '@brightchain/brighthub-lib';
+} from '@brightchain/brighthub-lib/lib/brighthub-lib';
 import {
   Close,
   Code,
@@ -55,8 +57,11 @@ import {
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
 import { MarkupHelpDialog } from './MarkupHelpDialog';
 
-/** Maximum character count for a post */
-const MAX_CHAR_COUNT = 280;
+/** Default maximum character count for a post */
+const DEFAULT_MAX_CHAR_COUNT = 280;
+
+/** Maximum character count for hub/long-form posts */
+export const HUB_POST_MAX_CHAR_COUNT = 10000;
 
 /** Maximum number of media attachments */
 const MAX_ATTACHMENTS = 4;
@@ -83,6 +88,8 @@ export interface PostComposerProps {
   onCancel?: () => void;
   /** Placeholder text for the editor */
   placeholder?: string;
+  /** Maximum character count (defaults to 280, use HUB_POST_MAX_CHAR_COUNT for hub posts) */
+  maxCharCount?: number;
 }
 
 /** Data submitted from the PostComposer */
@@ -119,6 +126,7 @@ export function PostComposer({
   onSubmit,
   onCancel,
   placeholder,
+  maxCharCount = DEFAULT_MAX_CHAR_COUNT,
 }: PostComposerProps) {
   const { t } = useBrightHubTranslation();
   const [content, setContent] = useState('');
@@ -146,13 +154,13 @@ export function PostComposer({
     () => getCharacterCount(content, isBlogPost),
     [content, isBlogPost],
   );
-  const charRemaining = MAX_CHAR_COUNT - charCount;
+  const charRemaining = maxCharCount - charCount;
   const isOverLimit = charRemaining < 0;
   const canSubmit = content.trim().length > 0 && !isOverLimit && !isSubmitting;
 
   const charProgressValue = useMemo(
-    () => Math.min((charCount / MAX_CHAR_COUNT) * 100, 100),
-    [charCount],
+    () => Math.min((charCount / maxCharCount) * 100, 100),
+    [charCount, maxCharCount],
   );
 
   const charProgressColor = useMemo(() => {
@@ -233,6 +241,12 @@ export function PostComposer({
       quotedPostId: quotedPost?._id,
       isBlogPost: isBlogPost,
     });
+    // Reset composer after submit
+    setContent('');
+    setMediaFiles([]);
+    setMediaPreviews([]);
+    setSelectedHubIds([]);
+    setShowPreview(false);
   };
 
   return (

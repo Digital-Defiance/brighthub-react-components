@@ -16,9 +16,13 @@ import {
 } from '@brightchain/brighthub-lib';
 import {
   ChatBubbleOutline,
+  Delete,
   Edit,
   Favorite,
   FavoriteBorder,
+  Flag,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
   Lock,
   Repeat,
 } from '@mui/icons-material';
@@ -57,6 +61,20 @@ export interface PostCardProps {
   onReply?: (postId: string) => void;
   /** Callback when the post card is clicked */
   onClick?: (postId: string) => void;
+  /** Callback when the upvote button is clicked (hub posts) */
+  onUpvote?: (postId: string) => void;
+  /** Callback when the downvote button is clicked (hub posts) */
+  onDownvote?: (postId: string) => void;
+  /** Callback when the report button is clicked */
+  onReport?: (postId: string) => void;
+  /** Callback when the edit button is clicked (only shown for own posts) */
+  onEdit?: (postId: string) => void;
+  /** Callback when the delete button is clicked (only shown for own posts) */
+  onDelete?: (postId: string) => void;
+  /** Current user's ID (to show edit/delete on own posts) */
+  currentUserId?: string;
+  /** Callback when the author name is clicked */
+  onAuthorClick?: (authorId: string) => void;
 }
 
 /**
@@ -95,11 +113,20 @@ export function PostCard({
   onRepost,
   onReply,
   onClick,
+  onUpvote,
+  onDownvote,
+  onReport,
+  onEdit,
+  onDelete,
+  currentUserId,
+  onAuthorClick,
 }: PostCardProps) {
   const displayName = author?.displayName ?? 'Unknown';
   const username = author?.username ?? 'unknown';
   const avatarUrl = author?.profilePictureUrl;
   const isHubRestricted = post.hubIds && post.hubIds.length > 0;
+  const isHubPost = isHubRestricted;
+  const isOwnPost = currentUserId === post.authorId;
   const { t } = useBrightHubTranslation();
 
   const handleCardClick = () => {
@@ -119,6 +146,31 @@ export function PostCard({
   const handleReply = (e: MouseEvent) => {
     e.stopPropagation();
     onReply?.(post._id);
+  };
+
+  const handleUpvote = (e: MouseEvent) => {
+    e.stopPropagation();
+    onUpvote?.(post._id);
+  };
+
+  const handleDownvote = (e: MouseEvent) => {
+    e.stopPropagation();
+    onDownvote?.(post._id);
+  };
+
+  const handleReport = (e: MouseEvent) => {
+    e.stopPropagation();
+    onReport?.(post._id);
+  };
+
+  const handleEdit = (e: MouseEvent) => {
+    e.stopPropagation();
+    onEdit?.(post._id);
+  };
+
+  const handleDelete = (e: MouseEvent) => {
+    e.stopPropagation();
+    onDelete?.(post._id);
   };
 
   if (post.isDeleted) {
@@ -181,7 +233,13 @@ export function PostCard({
                 gap: 0.5,
               }}
             >
-              <Typography variant="subtitle2" component="span" noWrap>
+              <Typography
+                variant="subtitle2"
+                component="span"
+                noWrap
+                sx={onAuthorClick ? { cursor: 'pointer', '&:hover': { textDecoration: 'underline' } } : undefined}
+                onClick={onAuthorClick ? (e: MouseEvent) => { e.stopPropagation(); onAuthorClick(post.authorId); } : undefined}
+              >
                 {displayName}
               </Typography>
               <Typography
@@ -189,6 +247,8 @@ export function PostCard({
                 color="text.secondary"
                 component="span"
                 noWrap
+                sx={onAuthorClick ? { cursor: 'pointer', '&:hover': { textDecoration: 'underline' } } : undefined}
+                onClick={onAuthorClick ? (e: MouseEvent) => { e.stopPropagation(); onAuthorClick(post.authorId); } : undefined}
               >
                 @{username}
               </Typography>
@@ -374,6 +434,79 @@ export function PostCard({
                   </Typography>
                 )}
               </Box>
+
+              {/* Upvote/Downvote for hub posts */}
+              {isHubPost && onUpvote && (
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                  <IconButton
+                    size="small"
+                    onClick={handleUpvote}
+                    aria-label="Upvote"
+                    color="default"
+                  >
+                    <KeyboardArrowUp sx={{ fontSize: 20 }} />
+                  </IconButton>
+                  <Typography
+                    variant="caption"
+                    color={
+                      (post.score ?? 0) > 0
+                        ? 'success.main'
+                        : (post.score ?? 0) < 0
+                          ? 'error.main'
+                          : 'text.secondary'
+                    }
+                    sx={{ minWidth: 16, textAlign: 'center' }}
+                  >
+                    {post.score ?? 0}
+                  </Typography>
+                  <IconButton
+                    size="small"
+                    onClick={handleDownvote}
+                    aria-label="Downvote"
+                    color="default"
+                  >
+                    <KeyboardArrowDown sx={{ fontSize: 20 }} />
+                  </IconButton>
+                </Box>
+              )}
+
+              {/* Report button */}
+              {onReport && (
+                <Box sx={{ display: 'flex', alignItems: 'center', ml: 'auto' }}>
+                  {isOwnPost && onEdit && (
+                    <Tooltip title="Edit">
+                      <IconButton
+                        size="small"
+                        onClick={handleEdit}
+                        aria-label="Edit post"
+                      >
+                        <Edit sx={{ fontSize: 16 }} />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                  {isOwnPost && onDelete && (
+                    <Tooltip title="Delete">
+                      <IconButton
+                        size="small"
+                        onClick={handleDelete}
+                        aria-label="Delete post"
+                        color="error"
+                      >
+                        <Delete sx={{ fontSize: 16 }} />
+                      </IconButton>
+                    </Tooltip>
+                  )}
+                  <Tooltip title="Report">
+                    <IconButton
+                      size="small"
+                      onClick={handleReport}
+                      aria-label="Report post"
+                    >
+                      <Flag sx={{ fontSize: 16 }} />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
+              )}
             </Box>
           </Box>
         </Box>

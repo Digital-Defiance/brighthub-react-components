@@ -60,6 +60,20 @@ export interface TimelineProps {
   onFilterChange?: (filter: TimelineFilter | undefined) => void;
   /** Message to display when there are no posts */
   emptyMessage?: string;
+  /** Callback when a post's upvote button is clicked */
+  onUpvote?: (postId: string) => void;
+  /** Callback when a post's downvote button is clicked */
+  onDownvote?: (postId: string) => void;
+  /** Callback when a post's report button is clicked */
+  onReport?: (postId: string) => void;
+  /** Callback when a post's edit button is clicked */
+  onEdit?: (postId: string) => void;
+  /** Callback when a post's delete button is clicked */
+  onDelete?: (postId: string) => void;
+  /** Current user's ID */
+  currentUserId?: string;
+  /** Callback when an author name is clicked */
+  onAuthorClick?: (authorId: string) => void;
 }
 
 /**
@@ -84,6 +98,13 @@ export function Timeline({
   onPostClick,
   onFilterChange,
   emptyMessage,
+  onUpvote,
+  onDownvote,
+  onReport,
+  onEdit,
+  onDelete,
+  currentUserId,
+  onAuthorClick,
 }: TimelineProps) {
   const { t } = useBrightHubTranslation();
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -173,6 +194,13 @@ export function Timeline({
           onRepost={onRepost}
           onReply={onReply}
           onClick={onPostClick}
+          onUpvote={onUpvote}
+          onDownvote={onDownvote}
+          onReport={onReport}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          currentUserId={currentUserId}
+          onAuthorClick={onAuthorClick}
         />
       ))}
 

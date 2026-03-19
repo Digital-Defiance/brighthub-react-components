@@ -98,7 +98,7 @@ export function NewConversationDialog({
     setGroupName('');
   };
 
-  const canStart = selected.length > 0 && (!isGroup || selected.length >= 2);
+  const canStart = selected.length > 0 && (!isGroup || selected.length >= 1);
 
   return (
     <Dialog
