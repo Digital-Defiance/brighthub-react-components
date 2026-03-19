@@ -9,6 +9,7 @@
 
 // Layout
 export { default as BrightHubLayout } from './lib/BrightHubLayout';
+export * from './lib/BrightHubMenu';
 
 // Theme Provider
 export * from './lib/theme';
