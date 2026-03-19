@@ -7,8 +7,8 @@
  * Implements Requirements 12.6, 53.4, 53.9, 53.10, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type { IBaseNotification } from '@brightchain/brighthub-lib';
+import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
   Box,
   CircularProgress,
@@ -18,7 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 import type { FC } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
 import { NotificationItem } from './NotificationItem';
 

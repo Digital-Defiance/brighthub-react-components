@@ -8,15 +8,15 @@
  * Implements Requirements 53.5, 56.1-56.10, 61.4
  */
 
-import type { BrightHubStringKey } from '@brightchain/brighthub-lib';
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type {
+  BrightHubStringKey,
   IBaseNotificationPreferences,
   IDoNotDisturbConfig,
   INotificationCategorySettings,
   IQuietHoursConfig,
 } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   MuteDuration,
   NotificationCategory,
   NotificationChannel,

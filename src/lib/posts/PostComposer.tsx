@@ -9,8 +9,8 @@
  * Implements Requirement 12.2
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   IBaseHub,
   IBasePostData,
   IBaseUserProfile,
@@ -562,10 +562,7 @@ export function PostComposer({
           </Box>
         </Box>
       </Box>
-      <MarkupHelpDialog
-        open={showHelp}
-        onClose={() => setShowHelp(false)}
-      />
+      <MarkupHelpDialog open={showHelp} onClose={() => setShowHelp(false)} />
     </Card>
   );
 }

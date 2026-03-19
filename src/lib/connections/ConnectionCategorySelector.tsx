@@ -8,8 +8,10 @@
  * Implements Requirements 35.3, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { IBaseConnectionCategory } from '@brightchain/brighthub-lib';
+import {
+  BrightHubStrings,
+  IBaseConnectionCategory,
+} from '@brightchain/brighthub-lib';
 import {
   Box,
   Checkbox,

@@ -7,8 +7,10 @@
  * Implements Requirements 35.4, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { IBaseConnectionNote } from '@brightchain/brighthub-lib';
+import {
+  BrightHubStrings,
+  IBaseConnectionNote,
+} from '@brightchain/brighthub-lib';
 import {
   Box,
   Button,
@@ -20,7 +22,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
 
 const MAX_NOTE_LENGTH = 500;

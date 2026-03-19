@@ -37,7 +37,7 @@ export interface ConversationSearchProps {
 export function ConversationSearch({
   onSearch,
   resultCount,
-  isSearching = false,
+  isSearching: _isSearching = false,
 }: ConversationSearchProps) {
   const { t } = useBrightHubTranslation();
   const [query, setQuery] = useState('');

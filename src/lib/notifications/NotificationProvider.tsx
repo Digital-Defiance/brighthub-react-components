@@ -8,13 +8,13 @@
  * Implements Requirements 52.1-52.10, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type {
   IBaseNotification,
   INotificationActions,
   INotificationProviderState,
 } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   NotificationCategory,
   NotificationType,
 } from '@brightchain/brighthub-lib';
@@ -277,7 +277,6 @@ export const NotificationProvider: FC<NotificationProviderProps> = ({
   /** Initial load */
   useEffect(() => {
     refreshNotifications();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = useMemo<NotificationContextValue>(
