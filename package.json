@@ -1,6 +1,6 @@
 {
   "name": "@brightchain/brighthub-react-components",
-  "version": "0.29.11",
+  "version": "0.29.24",
   "description": "React components for BrightHub social network module",
   "main": "./index.js",
   "module": "./index.mjs",
@@ -29,5 +29,10 @@
     "brightchain",
     "social-network",
     "react-components"
-  ]
+  ],
+  "scripts": {
+    "build": "npx nx build brighthub-react-components",
+    "test": "npx nx test brighthub-react-components",
+    "lint": "npx nx lint brighthub-react-components"
+  }
 }

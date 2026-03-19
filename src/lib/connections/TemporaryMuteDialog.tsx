@@ -9,8 +9,7 @@
  */
 
 import type { BrightHubStringKey } from '@brightchain/brighthub-lib';
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { MuteDuration } from '@brightchain/brighthub-lib';
+import { BrightHubStrings, MuteDuration } from '@brightchain/brighthub-lib';
 import {
   Button,
   Dialog,

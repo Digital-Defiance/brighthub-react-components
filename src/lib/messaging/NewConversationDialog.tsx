@@ -66,7 +66,7 @@ export function NewConversationDialog({
   onStart,
   searchResults,
   onSearchChange,
-  searching = false,
+  searching: _searching = false,
 }: NewConversationDialogProps) {
   const { t } = useBrightHubTranslation();
   const [query, setQuery] = useState('');

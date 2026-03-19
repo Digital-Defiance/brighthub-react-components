@@ -7,8 +7,8 @@
  * Implements Requirements 44.5, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type { IBaseDirectMessage } from '@brightchain/brighthub-lib';
+import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import { Forward } from '@mui/icons-material';
 import { Box, Chip, Paper, Typography } from '@mui/material';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
@@ -44,7 +44,7 @@ export function MessageBubble({
   reactions = [],
   onToggleReaction,
   onAddReaction,
-  onReply,
+  onReply: _onReply,
   replyPreview,
 }: MessageBubbleProps) {
   const { t } = useBrightHubTranslation();
