@@ -8,8 +8,10 @@
  */
 
 import type { BrightHubStringKeyValue } from '@brightchain/brighthub-lib';
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { NotificationCategory } from '@brightchain/brighthub-lib';
+import {
+  BrightHubStrings,
+  NotificationCategory,
+} from '@brightchain/brighthub-lib';
 import { Chip, Stack, Typography } from '@mui/material';
 import type { FC } from 'react';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';

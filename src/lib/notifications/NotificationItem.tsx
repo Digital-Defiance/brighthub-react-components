@@ -8,8 +8,8 @@
  * Implements Requirements 53.3, 53.7, 53.8, 54.7, 61.4, 61.6
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type { IBaseNotification } from '@brightchain/brighthub-lib';
+import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import { Delete, DoneAll, ExpandLess, ExpandMore } from '@mui/icons-material';
 import {
   Avatar,
@@ -21,7 +21,7 @@ import {
   Typography,
 } from '@mui/material';
 import type { FC } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
 
 /** Props for the NotificationItem component */

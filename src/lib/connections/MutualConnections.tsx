@@ -8,8 +8,7 @@
  * Implements Requirements 35.6, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { IBaseUserProfile } from '@brightchain/brighthub-lib';
+import { BrightHubStrings, IBaseUserProfile } from '@brightchain/brighthub-lib';
 import {
   Avatar,
   Box,

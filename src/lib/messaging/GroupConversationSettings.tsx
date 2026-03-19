@@ -7,9 +7,11 @@
  * Implements Requirements 44.9, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import type { IBaseGroupConversation } from '@brightchain/brighthub-lib';
-import { GroupParticipantRole } from '@brightchain/brighthub-lib';
+import {
+  BrightHubStrings,
+  GroupParticipantRole,
+} from '@brightchain/brighthub-lib';
 import {
   AdminPanelSettings,
   ExitToApp,
@@ -80,7 +82,7 @@ export function GroupConversationSettings({
   currentUserId,
   isAdmin,
   onUpdateName,
-  onUpdateAvatar,
+  onUpdateAvatar: _onUpdateAvatar,
   onAddParticipant,
   onRemoveParticipant,
   onPromoteToAdmin,

@@ -8,8 +8,8 @@
  * Implements Requirement 12.1
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   IBasePostData,
   IBaseUserProfile,
   PostType,

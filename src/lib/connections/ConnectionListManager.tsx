@@ -7,8 +7,8 @@
  * Implements Requirements 35.1, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   ConnectionVisibility,
   IBaseConnectionList,
 } from '@brightchain/brighthub-lib';

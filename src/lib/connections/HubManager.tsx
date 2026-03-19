@@ -8,8 +8,7 @@
  * Implements Requirements 35.8, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { IBaseHub } from '@brightchain/brighthub-lib';
+import { BrightHubStrings, IBaseHub } from '@brightchain/brighthub-lib';
 import {
   Add,
   Delete,

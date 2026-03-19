@@ -9,8 +9,10 @@
  */
 
 import type { BrightHubStringKey } from '@brightchain/brighthub-lib';
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import { ConnectionStrength } from '@brightchain/brighthub-lib';
+import {
+  BrightHubStrings,
+  ConnectionStrength,
+} from '@brightchain/brighthub-lib';
 import { Box, Typography } from '@mui/material';
 import { useBrightHubTranslation } from '../hooks/useBrightHubTranslation';
 

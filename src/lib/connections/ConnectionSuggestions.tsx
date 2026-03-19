@@ -8,8 +8,8 @@
  * Implements Requirements 35.5, 61.4
  */
 
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
+  BrightHubStrings,
   IBaseConnectionSuggestion,
   SuggestionReason,
 } from '@brightchain/brighthub-lib';

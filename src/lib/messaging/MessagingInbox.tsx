@@ -8,10 +8,11 @@
  * Implements Requirements 44.1, 61.4
  */
 
-import type { BrightHubStringKey } from '@brightchain/brighthub-lib';
-import { BrightHubStrings } from '@brightchain/brighthub-lib';
-import type { IBaseConversation } from '@brightchain/brighthub-lib';
-import { ConversationType } from '@brightchain/brighthub-lib';
+import type {
+  BrightHubStringKey,
+  IBaseConversation,
+} from '@brightchain/brighthub-lib';
+import { BrightHubStrings, ConversationType } from '@brightchain/brighthub-lib';
 import { Add, Group, PushPin } from '@mui/icons-material';
 import {
   Avatar,
