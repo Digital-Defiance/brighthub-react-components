@@ -1,14 +1,28 @@
 import { faCircleNodes } from '@awesome.me/kit-a20d532681/icons/classic/thin';
-import { BrightChainSubLogo } from '@brightchain/brightchain-react-components';
+import { THEME_COLORS } from '@brightchain/brightchain-lib';
+import {
+  BrightChainSubLogo,
+  LayoutShell,
+  SubLogoHeight,
+  SubLogoIconHeight,
+} from '@brightchain/brightchain-react-components';
 import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
   useAuth,
   useAuthenticatedApi,
   useI18n,
 } from '@digitaldefiance/express-suite-react-components';
-import { Box, Button, Container } from '@mui/material';
-import { FC, memo, useCallback, useEffect, useRef, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Box, Button, useTheme } from '@mui/material';
+import {
+  FC,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './BrightHub.scss';
 import { NotificationBell } from './notifications/NotificationBell';
 import { NotificationDropdown } from './notifications/NotificationDropdown';
@@ -18,6 +32,7 @@ const BrightHubLayout: FC = () => {
   const navigate = useNavigate();
   const api = useAuthenticatedApi();
   const { userData } = useAuth();
+  const contrastText = useTheme().palette.primary.contrastText;
   const userId = userData?.id;
 
   const [unreadCount, setUnreadCount] = useState(0);
@@ -48,54 +63,60 @@ const BrightHubLayout: FC = () => {
     setDropdownOpen((prev) => !prev);
   }, []);
 
-  return (
-    <Container maxWidth="lg">
-      <Box
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
-        my={2}
-      >
-        <Box display="flex" alignItems="center" gap={1}>
-          <BrightChainSubLogo
-            subText="Hub"
-            icon={faCircleNodes}
-            height={30}
-            iconHeight={20}
-          />
-        </Box>
-        <Box display="flex" alignItems="center" gap={1}>
-          <Box ref={bellRef} component="span">
-            <NotificationBell
-              unreadCount={unreadCount}
-              onClick={handleBellClick}
-            />
-          </Box>
-          <NotificationDropdown
-            open={dropdownOpen}
-            anchorEl={bellRef.current}
-            notifications={notifications}
-            onClose={() => setDropdownOpen(false)}
-            onViewAll={() => {
-              setDropdownOpen(false);
-              navigate('/brighthub/notifications');
-            }}
-            onMarkAllRead={() => {
-              if (userId) {
-                api
-                  .post('/brighthub/notifications/mark-all-read', { userId })
-                  .catch(() => {});
-              }
-              setUnreadCount(0);
-            }}
-          />
-          <Button variant="contained" onClick={() => navigate('/brighthub')}>
-            {t(BrightHubStrings.MessagingInbox_Title)}
-          </Button>
-        </Box>
+  const brandConfig = useMemo(
+    () => ({
+      appName: 'BrightHub',
+      logo: (
+        <BrightChainSubLogo
+          subText="Hub"
+          icon={faCircleNodes}
+          iconColor={contrastText}
+          height={SubLogoHeight}
+          iconHeight={SubLogoIconHeight}
+          leadColor={contrastText}
+        />
+      ),
+      primaryColor: THEME_COLORS.CHAIN_BLUE,
+    }),
+    [],
+  );
+
+  const toolbarActions = (
+    <Box display="flex" alignItems="center" gap={1}>
+      <Box ref={bellRef} component="span">
+        <NotificationBell unreadCount={unreadCount} onClick={handleBellClick} />
       </Box>
-      <Outlet />
-    </Container>
+      <NotificationDropdown
+        open={dropdownOpen}
+        anchorEl={bellRef.current}
+        notifications={notifications}
+        onClose={() => setDropdownOpen(false)}
+        onViewAll={() => {
+          setDropdownOpen(false);
+          navigate('/brighthub/notifications');
+        }}
+        onMarkAllRead={() => {
+          if (userId) {
+            api
+              .post('/brighthub/notifications/mark-all-read', { userId })
+              .catch(() => {});
+          }
+          setUnreadCount(0);
+        }}
+      />
+      <Button
+        variant="contained"
+        color="inherit"
+        onClick={() => navigate('/brighthub')}
+        sx={{ color: 'primary.main' }}
+      >
+        {t(BrightHubStrings.MessagingInbox_Title)}
+      </Button>
+    </Box>
+  );
+
+  return (
+    <LayoutShell brandConfig={brandConfig} toolbarActions={toolbarActions} />
   );
 };
 
