@@ -277,6 +277,7 @@ export const NotificationProvider: FC<NotificationProviderProps> = ({
   /** Initial load */
   useEffect(() => {
     refreshNotifications();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const value = useMemo<NotificationContextValue>(
