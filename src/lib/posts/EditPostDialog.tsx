@@ -70,8 +70,13 @@ export function EditPostDialog({
           </Typography>
         ) : (
           <>
-            <Typography variant="caption" color="text.secondary" sx={{ mb: 1, display: 'block' }}>
-              {minutesLeft} minute{minutesLeft !== 1 ? 's' : ''} remaining to edit
+            <Typography
+              variant="caption"
+              color="text.secondary"
+              sx={{ mb: 1, display: 'block' }}
+            >
+              {minutesLeft} minute{minutesLeft !== 1 ? 's' : ''} remaining to
+              edit
             </Typography>
             <TextField
               autoFocus
@@ -96,7 +101,11 @@ export function EditPostDialog({
             onClick={handleSave}
             disabled={!content.trim() || saving || content === currentContent}
           >
-            {saving ? <CircularProgress size={20} /> : t(BrightHubStrings.HubManager_Save)}
+            {saving ? (
+              <CircularProgress size={20} />
+            ) : (
+              t(BrightHubStrings.HubManager_Save)
+            )}
           </Button>
         )}
       </DialogActions>

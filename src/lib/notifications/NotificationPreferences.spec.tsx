@@ -11,6 +11,7 @@ jest.mock('@brightchain/brighthub-lib', () => ({
 jest.mock('../hooks/useBrightHubTranslation', () => ({
   useBrightHubTranslation: () => ({
     t: (key: string, _vars?: Record<string, string>) => key,
+    tEnum: (_enumType: unknown, value: unknown) => String(value),
   }),
 }));
 

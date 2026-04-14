@@ -25,6 +25,7 @@ import {
   type NavItem,
   type SidebarConfig,
 } from '@brightchain/brightchain-react-components';
+import type { IBaseHub } from '@brightchain/brighthub-lib';
 import { BrightHubStrings } from '@brightchain/brighthub-lib';
 import {
   useAuth,
@@ -33,15 +34,7 @@ import {
 } from '@digitaldefiance/express-suite-react-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, useTheme } from '@mui/material';
-import {
-  FC,
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import type { IBaseHub } from '@brightchain/brighthub-lib';
+import { FC, memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './BrightHub.scss';
 import {

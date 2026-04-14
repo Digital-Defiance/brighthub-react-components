@@ -8,7 +8,6 @@
  * Implements Requirements 35.7, 61.4
  */
 
-import type { BrightHubStringKey } from '@brightchain/brighthub-lib';
 import {
   BrightHubStrings,
   ConnectionStrength,
@@ -29,16 +28,6 @@ const strengthColorMap: Record<ConnectionStrength, string> = {
   [ConnectionStrength.Dormant]: '#757575',
 };
 
-const strengthLabelMap: Record<ConnectionStrength, BrightHubStringKey> = {
-  [ConnectionStrength.Strong]:
-    BrightHubStrings.ConnectionStrengthIndicator_Strong,
-  [ConnectionStrength.Moderate]:
-    BrightHubStrings.ConnectionStrengthIndicator_Moderate,
-  [ConnectionStrength.Weak]: BrightHubStrings.ConnectionStrengthIndicator_Weak,
-  [ConnectionStrength.Dormant]:
-    BrightHubStrings.ConnectionStrengthIndicator_Dormant,
-};
-
 /**
  * ConnectionStrengthIndicator
  *
@@ -48,10 +37,10 @@ const strengthLabelMap: Record<ConnectionStrength, BrightHubStringKey> = {
 export function ConnectionStrengthIndicator({
   strength,
 }: ConnectionStrengthIndicatorProps) {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
 
   const color = strengthColorMap[strength];
-  const label = t(strengthLabelMap[strength]);
+  const label = tEnum(ConnectionStrength, strength);
 
   return (
     <Box

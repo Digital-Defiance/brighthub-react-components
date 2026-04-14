@@ -51,20 +51,10 @@ export function ConnectionSuggestions({
   onFollow,
   onDismiss,
 }: ConnectionSuggestionsProps) {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
 
-  const reasonLabel = (reason: SuggestionReason): string => {
-    switch (reason) {
-      case SuggestionReason.MutualConnections:
-        return t(
-          BrightHubStrings.ConnectionSuggestions_ReasonMutualConnections,
-        );
-      case SuggestionReason.SimilarInterests:
-        return t(BrightHubStrings.ConnectionSuggestions_ReasonSimilarInterests);
-      case SuggestionReason.SimilarToUser:
-        return t(BrightHubStrings.ConnectionSuggestions_ReasonSimilarToUser);
-    }
-  };
+  const reasonLabel = (reason: SuggestionReason): string =>
+    tEnum(SuggestionReason, reason);
 
   const mutualLabel = (count: number): string => {
     if (count === 1) {

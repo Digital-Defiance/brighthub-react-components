@@ -11,8 +11,7 @@
 export { PostCard } from './PostCard';
 export type { PostCardProps } from './PostCard';
 
-export { PostComposer } from './PostComposer';
-export { HUB_POST_MAX_CHAR_COUNT } from './PostComposer';
+export { HUB_POST_MAX_CHAR_COUNT, PostComposer } from './PostComposer';
 export type { PostComposerProps, PostComposerSubmitData } from './PostComposer';
 
 export { MarkupHelpDialog } from './MarkupHelpDialog';

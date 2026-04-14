@@ -7,7 +7,6 @@
  * Implements Requirements 53.6, 55.10, 61.4
  */
 
-import type { BrightHubStringKeyValue } from '@brightchain/brighthub-lib';
 import {
   BrightHubStrings,
   NotificationCategory,
@@ -24,17 +23,6 @@ export interface NotificationCategoryFilterProps {
   onChange: (categories: NotificationCategory[]) => void;
 }
 
-const CATEGORY_LABELS: Record<NotificationCategory, BrightHubStringKeyValue> = {
-  [NotificationCategory.Social]:
-    BrightHubStrings.NotificationCategoryFilter_Social,
-  [NotificationCategory.Messages]:
-    BrightHubStrings.NotificationCategoryFilter_Messages,
-  [NotificationCategory.Connections]:
-    BrightHubStrings.NotificationCategoryFilter_Connections,
-  [NotificationCategory.System]:
-    BrightHubStrings.NotificationCategoryFilter_System,
-};
-
 /**
  * NotificationCategoryFilter
  *
@@ -43,7 +31,7 @@ const CATEGORY_LABELS: Record<NotificationCategory, BrightHubStringKeyValue> = {
 export const NotificationCategoryFilter: FC<
   NotificationCategoryFilterProps
 > = ({ selectedCategories, onChange }) => {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
 
   const isAllSelected = selectedCategories.length === 0;
 
@@ -82,7 +70,7 @@ export const NotificationCategoryFilter: FC<
         return (
           <Chip
             key={category}
-            label={t(CATEGORY_LABELS[category])}
+            label={tEnum(NotificationCategory, category)}
             variant={isSelected ? 'filled' : 'outlined'}
             color={isSelected ? 'primary' : 'default'}
             onClick={() => handleToggle(category)}

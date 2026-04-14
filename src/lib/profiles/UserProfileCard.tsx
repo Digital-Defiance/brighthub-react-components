@@ -92,22 +92,7 @@ export function UserProfileCard({
   onClick,
   actionElement,
 }: UserProfileCardProps) {
-  const { t } = useBrightHubTranslation();
-
-  const strengthLabels: Record<ConnectionStrength, string> = {
-    [ConnectionStrength.Strong]: t(
-      BrightHubStrings.UserProfileCard_StrongConnection,
-    ),
-    [ConnectionStrength.Moderate]: t(
-      BrightHubStrings.UserProfileCard_ModerateConnection,
-    ),
-    [ConnectionStrength.Weak]: t(
-      BrightHubStrings.UserProfileCard_WeakConnection,
-    ),
-    [ConnectionStrength.Dormant]: t(
-      BrightHubStrings.UserProfileCard_DormantConnection,
-    ),
-  };
+  const { t, tEnum } = useBrightHubTranslation();
 
   const handleClick = () => {
     onClick?.(user._id);
@@ -283,7 +268,7 @@ export function UserProfileCard({
           <Box sx={{ mt: 1.5 }}>
             <Chip
               size="small"
-              label={strengthLabels[connectionStrength]}
+              label={tEnum(ConnectionStrength, connectionStrength)}
               sx={{
                 bgcolor: `${strengthColors[connectionStrength]}20`,
                 color: strengthColors[connectionStrength],

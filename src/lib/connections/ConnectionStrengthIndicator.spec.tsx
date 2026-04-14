@@ -6,11 +6,19 @@ jest.mock('@brightchain/brightchain-lib', () => ({
     { get: (_target: unknown, prop: string) => String(prop) },
   ),
   BrightHubComponentId: 'BrightHub',
+  i18nEngine: {
+    registerEnum: jest.fn(() => ({})),
+    translate: jest.fn((key: string) => key),
+    translateEnum: jest.fn((_enumType: unknown, value: unknown) =>
+      String(value),
+    ),
+  },
 }));
 
 jest.mock('../hooks/useBrightHubTranslation', () => ({
   useBrightHubTranslation: () => ({
     t: (key: string, _vars?: Record<string, string>) => key,
+    tEnum: (_enumType: unknown, value: unknown) => String(value),
   }),
 }));
 
@@ -29,7 +37,7 @@ describe('ConnectionStrengthIndicator', () => {
       screen.getByTestId('connection-strength-indicator'),
     ).toBeInTheDocument();
     expect(screen.getByTestId('strength-label')).toHaveTextContent(
-      'ConnectionStrengthIndicator_Strong',
+      'strong',
     );
   });
 
@@ -39,7 +47,7 @@ describe('ConnectionStrengthIndicator', () => {
     );
 
     expect(screen.getByTestId('strength-label')).toHaveTextContent(
-      'ConnectionStrengthIndicator_Moderate',
+      'moderate',
     );
   });
 
@@ -47,7 +55,7 @@ describe('ConnectionStrengthIndicator', () => {
     render(<ConnectionStrengthIndicator strength={ConnectionStrength.Weak} />);
 
     expect(screen.getByTestId('strength-label')).toHaveTextContent(
-      'ConnectionStrengthIndicator_Weak',
+      'weak',
     );
   });
 
@@ -57,7 +65,7 @@ describe('ConnectionStrengthIndicator', () => {
     );
 
     expect(screen.getByTestId('strength-label')).toHaveTextContent(
-      'ConnectionStrengthIndicator_Dormant',
+      'dormant',
     );
   });
 

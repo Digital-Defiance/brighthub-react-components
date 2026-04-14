@@ -94,7 +94,7 @@ export function ConnectionListManager({
   onAddMembers,
   onRemoveMembers,
 }: ConnectionListManagerProps) {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
 
   // Dialog state
   const [formOpen, setFormOpen] = useState(false);
@@ -115,18 +115,8 @@ export function ConnectionListManager({
   );
   const [memberIdsText, setMemberIdsText] = useState('');
 
-  const visibilityLabel = (v: ConnectionVisibility) => {
-    switch (v) {
-      case ConnectionVisibility.Private:
-        return t(BrightHubStrings.ConnectionListManager_VisibilityPrivate);
-      case ConnectionVisibility.FollowersOnly:
-        return t(
-          BrightHubStrings.ConnectionListManager_VisibilityFollowersOnly,
-        );
-      case ConnectionVisibility.Public:
-        return t(BrightHubStrings.ConnectionListManager_VisibilityPublic);
-    }
-  };
+  const visibilityLabel = (v: ConnectionVisibility) =>
+    tEnum(ConnectionVisibility, v);
 
   const openCreateDialog = () => {
     setEditingList(null);

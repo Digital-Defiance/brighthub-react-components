@@ -27,10 +27,7 @@ export function DetailPanelProvider({ children }: { children: ReactNode }) {
     (c: ReactNode | null) => setContentState(c),
     [],
   );
-  const value = useMemo(
-    () => ({ content, setContent }),
-    [content, setContent],
-  );
+  const value = useMemo(() => ({ content, setContent }), [content, setContent]);
   return (
     <DetailPanelContext.Provider value={value}>
       {children}

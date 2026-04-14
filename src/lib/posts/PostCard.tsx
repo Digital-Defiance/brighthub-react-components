@@ -237,8 +237,22 @@ export function PostCard({
                 variant="subtitle2"
                 component="span"
                 noWrap
-                sx={onAuthorClick ? { cursor: 'pointer', '&:hover': { textDecoration: 'underline' } } : undefined}
-                onClick={onAuthorClick ? (e: MouseEvent) => { e.stopPropagation(); onAuthorClick(post.authorId); } : undefined}
+                sx={
+                  onAuthorClick
+                    ? {
+                        cursor: 'pointer',
+                        '&:hover': { textDecoration: 'underline' },
+                      }
+                    : undefined
+                }
+                onClick={
+                  onAuthorClick
+                    ? (e: MouseEvent) => {
+                        e.stopPropagation();
+                        onAuthorClick(post.authorId);
+                      }
+                    : undefined
+                }
               >
                 {displayName}
               </Typography>
@@ -247,8 +261,22 @@ export function PostCard({
                 color="text.secondary"
                 component="span"
                 noWrap
-                sx={onAuthorClick ? { cursor: 'pointer', '&:hover': { textDecoration: 'underline' } } : undefined}
-                onClick={onAuthorClick ? (e: MouseEvent) => { e.stopPropagation(); onAuthorClick(post.authorId); } : undefined}
+                sx={
+                  onAuthorClick
+                    ? {
+                        cursor: 'pointer',
+                        '&:hover': { textDecoration: 'underline' },
+                      }
+                    : undefined
+                }
+                onClick={
+                  onAuthorClick
+                    ? (e: MouseEvent) => {
+                        e.stopPropagation();
+                        onAuthorClick(post.authorId);
+                      }
+                    : undefined
+                }
               >
                 @{username}
               </Typography>

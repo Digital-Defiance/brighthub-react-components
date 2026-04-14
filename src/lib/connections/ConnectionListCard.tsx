@@ -48,18 +48,10 @@ const visibilityIcons: Record<ConnectionVisibility, React.ReactNode> = {
  * Clickable for navigation to list details.
  */
 export function ConnectionListCard({ list, onClick }: ConnectionListCardProps) {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
 
-  const visibilityLabel = (v: ConnectionVisibility) => {
-    switch (v) {
-      case ConnectionVisibility.Private:
-        return t(BrightHubStrings.ConnectionListCard_VisibilityPrivate);
-      case ConnectionVisibility.FollowersOnly:
-        return t(BrightHubStrings.ConnectionListCard_VisibilityFollowersOnly);
-      case ConnectionVisibility.Public:
-        return t(BrightHubStrings.ConnectionListCard_VisibilityPublic);
-    }
-  };
+  const visibilityLabel = (v: ConnectionVisibility) =>
+    tEnum(ConnectionVisibility, v);
 
   const formattedDate = new Date(list.createdAt).toLocaleDateString();
 

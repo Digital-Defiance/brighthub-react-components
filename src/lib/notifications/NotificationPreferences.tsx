@@ -46,17 +46,6 @@ export interface NotificationPreferencesProps {
   onSave?: (preferences: IBaseNotificationPreferences<string>) => void;
 }
 
-const CATEGORY_LABEL_MAP: Record<NotificationCategory, BrightHubStringKey> = {
-  [NotificationCategory.Social]:
-    BrightHubStrings.NotificationPreferences_CategorySocial,
-  [NotificationCategory.Messages]:
-    BrightHubStrings.NotificationPreferences_CategoryMessages,
-  [NotificationCategory.Connections]:
-    BrightHubStrings.NotificationPreferences_CategoryConnections,
-  [NotificationCategory.System]:
-    BrightHubStrings.NotificationPreferences_CategorySystem,
-};
-
 const CHANNEL_LABEL_MAP: Record<NotificationChannel, BrightHubStringKey> = {
   [NotificationChannel.InApp]:
     BrightHubStrings.NotificationPreferences_ChannelInApp,
@@ -75,7 +64,7 @@ export const NotificationPreferences: FC<NotificationPreferencesProps> = ({
   preferences,
   onSave,
 }) => {
-  const { t } = useBrightHubTranslation();
+  const { t, tEnum } = useBrightHubTranslation();
   const [state, setState] = useState(preferences);
 
   const updateCategorySetting = (
@@ -158,7 +147,7 @@ export const NotificationPreferences: FC<NotificationPreferencesProps> = ({
                   data-testid={`category-toggle-${category}`}
                 />
               }
-              label={t(CATEGORY_LABEL_MAP[category])}
+              label={tEnum(NotificationCategory, category)}
             />
             {/* Per-channel toggles for this category */}
             {state.categorySettings[category]?.enabled && (

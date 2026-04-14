@@ -12,6 +12,7 @@ jest.mock('@brightchain/brighthub-lib', () => ({
 jest.mock('../hooks/useBrightHubTranslation', () => ({
   useBrightHubTranslation: () => ({
     t: (key: string, _vars?: Record<string, string>) => key,
+    tEnum: (_enumType: unknown, value: unknown) => String(value),
   }),
 }));
 
@@ -113,13 +114,13 @@ describe('ConnectionSuggestions', () => {
     render(<ConnectionSuggestions suggestions={makeSuggestions()} />);
 
     expect(
-      screen.getByText('ConnectionSuggestions_ReasonMutualConnections'),
+      screen.getByText('mutual_connections'),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('ConnectionSuggestions_ReasonSimilarInterests'),
+      screen.getByText('similar_interests'),
     ).toBeInTheDocument();
     expect(
-      screen.getByText('ConnectionSuggestions_ReasonSimilarToUser'),
+      screen.getByText('similar_to_user'),
     ).toBeInTheDocument();
   });
 

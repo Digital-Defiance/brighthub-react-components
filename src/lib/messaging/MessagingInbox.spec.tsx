@@ -5,6 +5,13 @@ jest.mock('@brightchain/brightchain-lib', () => ({
     { get: (_target: unknown, prop: string) => String(prop) },
   ),
   BrightHubComponentId: 'BrightHub',
+  i18nEngine: {
+    registerEnum: jest.fn(() => ({})),
+    translate: jest.fn((key: string) => key),
+    translateEnum: jest.fn((_enumType: unknown, value: unknown) =>
+      String(value),
+    ),
+  },
 }));
 
 jest.mock('../hooks/useBrightHubTranslation', () => ({
